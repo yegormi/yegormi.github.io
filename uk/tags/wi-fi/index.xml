@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Wi-Fi on Розкриття міфів IT</title><link>https://yegormi.github.io/uk/tags/wi-fi/</link><description>Recent content in Wi-Fi on Розкриття міфів IT</description><generator>Hugo -- gohugo.io</generator><language>uk</language><lastBuildDate>Mon, 30 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://yegormi.github.io/uk/tags/wi-fi/index.xml" rel="self" type="application/rss+xml"/><item><title>Чому більшість Wi-Fi мереж є небезпечними</title><link>https://yegormi.github.io/uk/post/%D1%87%D0%BE%D0%BC%D1%83-%D0%B1%D1%96%D0%BB%D1%8C%D1%88%D1%96%D1%81%D1%82%D1%8C-wi-fi-%D0%BC%D0%B5%D1%80%D0%B5%D0%B6-%D1%94-%D0%BD%D0%B5%D0%B1%D0%B5%D0%B7%D0%BF%D0%B5%D1%87%D0%BD%D0%B8%D0%BC%D0%B8/</link><pubDate>Mon, 30 Sep 2024 00:00:00 +0000</pubDate><guid>https://yegormi.github.io/uk/post/%D1%87%D0%BE%D0%BC%D1%83-%D0%B1%D1%96%D0%BB%D1%8C%D1%88%D1%96%D1%81%D1%82%D1%8C-wi-fi-%D0%BC%D0%B5%D1%80%D0%B5%D0%B6-%D1%94-%D0%BD%D0%B5%D0%B1%D0%B5%D0%B7%D0%BF%D0%B5%D1%87%D0%BD%D0%B8%D0%BC%D0%B8/</guid><description>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/header.jpg" alt="Featured image of post Чому більшість Wi-Fi мереж є небезпечними" />&lt;h2 id="вступ">Вступ
+&lt;/h2>&lt;p>У нашому взаємопов&amp;rsquo;язаному суспільстві Wi-Fi мережі скрізь, пропонуючи легкий доступ до інтернету вдома, на робочих місцях та в громадських зонах. Проте багато людей не усвідомлюють ризиків безпеки, які з цим пов&amp;rsquo;язані, і наскільки легко їх експлуатувати за допомогою доступних інструментів. Ця стаття заглиблюється в процедуру тестування вразливостей Wi-Fi, щоб показати, наскільки вразливими є більшість мереж, підкреслюючи важливість посилених заходів безпеки.&lt;/p>
+&lt;h2 id="налаштування-середовища">Налаштування середовища
+&lt;/h2>&lt;p>Перш ніж заглибитися в детальне вивчення вразливостей Wi-Fi, важливо створити тестове середовище для проведення тестів на проникнення. Використання віртуальної машини (ВМ) є рекомендованим та найбезпечнішим підходом для розгортання Kali Linux, широко використовуваного дистрибутиву для тестування на проникнення.&lt;/p>
+&lt;h3 id="1-встановлення-kali-linux">1. Встановлення Kali Linux
+&lt;/h3>&lt;p>Завантажте останній образ ВМ з офіційної сторінки завантаження, який сумісний з вашим програмним забезпеченням для віртуалізації: &lt;a class="link" href="https://www.kali.org/get-kali/" target="_blank" rel="noopener"
+>Веб-сайт Kali Linux&lt;/a>. Kali Linux вже надає готові образи ВМ для:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>VMware&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>VirtualBox&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>Виберіть відповідний для вашої платформи віртуалізації.&lt;/p>
+&lt;h3 id="2-встановлення-програмного-забезпечення">2. Встановлення програмного забезпечення
+&lt;/h3>&lt;p>Якщо ще не встановлено, завантажте та встановіть одне з наступних програмних забезпечень для віртуалізації:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a class="link" href="https://www.vmware.com/products/workstation-player.html" target="_blank" rel="noopener"
+>VMware Workstation Player&lt;/a>&lt;/strong> (Безкоштовно для особистого використання)&lt;/li>
+&lt;li>&lt;strong>&lt;a class="link" href="https://www.virtualbox.org/" target="_blank" rel="noopener"
+>Oracle VM VirtualBox&lt;/a>&lt;/strong> (Безкоштовний та з відкритим кодом)&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-налаштування-вм">3. Налаштування ВМ
+&lt;/h3>&lt;h4 id="для-користувачів-vmware">Для користувачів VMware
+&lt;/h4>&lt;ol>
+&lt;li>&lt;strong>Імпорт образу ВМ:&lt;/strong>
+&lt;ul>
+&lt;li>Запустіть VMware Workstation Player.&lt;/li>
+&lt;li>Виберіть завантажений файл в меню Відкрити під File.&lt;/li>
+&lt;li>Дотримуйтесь інструкцій на екрані для імпорту ВМ.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-1.png"
+width="1504"
+height="1290"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-1_hu17214482242665049184.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-1_hu9833357414133138650.png 1024w"
+loading="lazy"
+alt="Початковий екран при запуску VMWare"
+class="gallery-image"
+data-flex-grow="116"
+data-flex-basis="279px"
+>&lt;/p>
+&lt;ol start="2">
+&lt;li>&lt;strong>Налаштування параметрів ВМ (Опціонально):&lt;/strong>
+&lt;ul>
+&lt;li>Налаштуйте параметри пам&amp;rsquo;яті та ЦП відповідно до можливостей вашої системи.&lt;/li>
+&lt;li>Переконайтеся, що мережевий адаптер відповідає вашим потребам: або &lt;strong>Bridged&lt;/strong>, або &lt;strong>NAT&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-2.png"
+width="1504"
+height="1290"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-2_hu5363327194474366268.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-2_hu15272464421394711467.png 1024w"
+loading="lazy"
+alt="Налаштуйте ВМ відповідно до ваших уподобань"
+class="gallery-image"
+data-flex-grow="116"
+data-flex-basis="279px"
+>&lt;/p>
+&lt;h4 id="для-користувачів-virtualbox">Для користувачів VirtualBox
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Імпорт образу ВМ:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Відкрийте VirtualBox.&lt;/li>
+&lt;li>Виберіть File, потім Import, щоб вибрати завантажений файл .ova.&lt;/li>
+&lt;li>Завершіть інструкції для додавання ВМ.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Налаштування параметрів ВМ (Опціонально):&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Клацніть правою кнопкою миші на ВМ Kali та виберіть &lt;strong>Settings&lt;/strong>.&lt;/li>
+&lt;li>Налаштуйте параметри System щодо пам&amp;rsquo;яті та процесорів.&lt;/li>
+&lt;li>Переконайтеся, що мережевий адаптер відповідає вашим потребам: або &lt;strong>Bridged&lt;/strong>, або &lt;strong>NAT&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="4-встановлення-kali-linux">4. Встановлення Kali Linux
+&lt;/h3>&lt;p>Після налаштування ВМ вам потрібно пройти процес встановлення Kali Linux. Для цього:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>Увімкніть ВМ, вибравши її та натиснувши кнопку &lt;strong>Start&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Ви побачите меню завантаження Kali Linux. Виберіть &amp;ldquo;Graphical Install&amp;rdquo; або &amp;ldquo;Install&amp;rdquo;, залежно від ваших уподобань.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Продовжуйте встановлення, проходячи кожен крок у TUI:&lt;/p>
+&lt;ul>
+&lt;li>Виберіть мову, місцезнаходження та розкладку клавіатури.&lt;/li>
+&lt;li>Налаштуйте мережу: зазвичай це встановлюється за замовчуванням&lt;/li>
+&lt;li>Налаштуйте користувачів та пароль: не забудьте ввести надійний пароль&lt;/li>
+&lt;li>Розділіть диск: зазвичай можна вибрати Guided - use entire disk and set up LVM&lt;/li>
+&lt;li>Встановіть базову систему та додаткові пакети.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-3.png"
+width="2272"
+height="1836"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-3_hu10420921765024723975.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-3_hu11310561816179519152.png 1024w"
+loading="lazy"
+alt="Процес встановлення"
+class="gallery-image"
+data-flex-grow="123"
+data-flex-basis="296px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Після завершення встановлення система запропонує вам перезавантажитися.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-4.png"
+width="2184"
+height="1748"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-4_hu5689929523935841098.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-4_hu7897505679553226658.png 1024w"
+loading="lazy"
+alt="Просто натисніть продовжити для перезавантаження"
+class="gallery-image"
+data-flex-grow="124"
+data-flex-basis="299px"
+>&lt;/p>
+&lt;h3 id="5-запуск-kali-linux">5. Запуск Kali Linux
+&lt;/h3>&lt;ul>
+&lt;li>Після перезавантаження машини ви побачите екран входу в Kali Linux.&lt;/li>
+&lt;li>Увійдіть, використовуючи ім&amp;rsquo;я користувача та пароль, вказані під час встановлення.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-5.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-5_hu15404722151166048964.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-5_hu17829648685512859959.png 1024w"
+loading="lazy"
+alt="Увійдіть, використовуючи облікові дані"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Якщо ви не змінили облікові дані за замовчуванням під час встановлення, вони будуть:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Ім&amp;rsquo;я користувача:&lt;/strong> &lt;code>kali&lt;/code>&lt;/li>
+&lt;li>&lt;strong>Пароль:&lt;/strong> &lt;code>kali&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Наполегливо рекомендується змінити цей пароль за замовчуванням при першому використанні Kali Linux:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">passwd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h3 id="6-оновлення-kali-linux">6. Оновлення Kali Linux
+&lt;/h3>&lt;p>Переконайтеся, що ваш екземпляр Kali Linux оновлений:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sudo apt full-upgrade -y
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="7-налаштування-зовнішнього-wi-fi-адаптера">7. Налаштування зовнішнього Wi-Fi адаптера
+&lt;/h3>&lt;p>Для ефективного тестування бездротового проникнення необхідний зовнішній Wi-Fi адаптер, який підтримує режим монітора та ін&amp;rsquo;єкцію пакетів.&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Підключіть Wi-Fi адаптер:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Підключіть адаптер до вашого комп&amp;rsquo;ютера.&lt;/li>
+&lt;li>Я буду використовувати USB-C до USB-A для використання одного з моїх Wi-Fi адаптерів на базі Ralink RT5370&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/setup-1.jpeg"
+width="1280"
+height="960"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/setup-1_hu428951483295719716.jpeg 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/setup-1_hu6933423474358102067.jpeg 1024w"
+loading="lazy"
+alt="Налаштування з Macbook Pro 16 2021."
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>
+&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/setup-2.jpeg"
+width="960"
+height="1280"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/setup-2_hu13160709169778743488.jpeg 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/setup-2_hu6073102148572241110.jpeg 1024w"
+loading="lazy"
+alt="Ralink RT5370"
+class="gallery-image"
+data-flex-grow="75"
+data-flex-basis="180px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Приєднайте адаптер до ВМ:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Для VMware:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Кожного разу, коли підключається будь-який USB, з&amp;rsquo;являється спливаюче вікно з питанням, чи хочете ви залишити його з батьківським ПК або передати його ВМ&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-6.png"
+width="2566"
+height="1674"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-6_hu1417208922971698697.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-6_hu15905473967214132682.png 1024w"
+loading="lazy"
+alt="У нашому випадку виберіть &amp;ldquo;Connect to Linux&amp;rdquo;"
+class="gallery-image"
+data-flex-grow="153"
+data-flex-basis="367px"
+>&lt;/p>
+&lt;p>АБО&lt;/p>
+&lt;ul>
+&lt;li>Перейдіть до &lt;strong>Virtual Machine&lt;/strong> &amp;gt; &lt;strong>USB&lt;/strong> &amp;gt; &lt;strong>Connect &amp;ldquo;Назва вашого пристрою&amp;rdquo;&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-7.png"
+width="1896"
+height="1568"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-7_hu2558111169429166473.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-7_hu5009274314424409601.png 1024w"
+loading="lazy"
+alt="Virtual Machine -&amp;gt; USB -&amp;gt; Connect &amp;ldquo;Назва вашого пристрою&amp;rdquo;"
+class="gallery-image"
+data-flex-grow="120"
+data-flex-basis="290px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Для VirtualBox:&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Перейдіть до &lt;strong>Devices&lt;/strong> &amp;gt; &lt;strong>USB&lt;/strong> &amp;gt; Виберіть ваш Wi-Fi адаптер.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Перевірте адаптер в Kali:&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">iwconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-8.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-8_hu1794738750945357860.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-8_hu9705603725556688779.png 1024w"
+loading="lazy"
+alt="Перевірте наявність інтерфейсу, схожого на &amp;ldquo;wlan0&amp;rdquo;"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="8-тестування-налаштування">8. Тестування налаштування
+&lt;/h3>&lt;p>Підтвердіть, що ваш Wi-Fi адаптер може переходити в режим монітора:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo airmon-ng start wlan0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-9.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-9_hu1383302674903540135.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-9_hu7964125706822777899.png 1024w"
+loading="lazy"
+alt="Як ми бачимо, щось заважає нам перейти в режим монітора на нашому Wi-Fi"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;p>Після встановлення ВМ Kali Linux ми можемо перейти безпосередньо до тестування на проникнення та обійти проблему, зазначену вище&lt;/p>
+&lt;h2 id="розуміння-вразливостей-wi-fi">Розуміння вразливостей Wi-Fi
+&lt;/h2>&lt;p>Старіші протоколи безпеки в мережах Wi-Fi роблять їх вразливими до різноманітних атак. Хакери можуть викрасти дані та отримати доступ до заборонених областей. У цьому аналізі будуть пояснені кроки, що входять до звичайного сценарію тестування на проникнення Wi-Fi, щоб розкрити ці вразливості.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>⚠️ ВАЖЛИВЕ ЕТИЧНЕ ТА ПРАВОВЕ ПОВІДОМЛЕННЯ ⚠️&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Важливо зазначити, що таке зламування паролів слід проводити тільки на мережах, якими володієте ви або на які маєте явний дозвіл на тестування. Зламування паролів на чужих мережах вважається незаконним і абсолютно неетичним.&lt;/strong>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="процес-тестування-на-проникнення-wi-fi">Процес тестування на проникнення Wi-Fi
+&lt;/h2>&lt;h3 id="1-перевірка-мережевих-інтерфейсів">1. Перевірка мережевих інтерфейсів
+&lt;/h3>&lt;p>Почніть зі збору інформації про інтерфейси та мережі вашої системи.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Перегляд версії Kali Linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cat /etc/os-release
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">uname -a
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-10.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-10_hu12403166022881028388.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-10_hu54680655374730690.png 1024w"
+loading="lazy"
+alt="Моя поточна версія Kali Linux"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Список мережевих інтерфейсів&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ip addr
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iwconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-11.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-11_hu7932517888052363462.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-11_hu12469367884055419330.png 1024w"
+loading="lazy"
+alt="Інтернет-інтерфейси"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;p>Як ми вже бачимо, назву &lt;code>wlan0&lt;/code> було змінено на &lt;code>wlan0mon&lt;/code>, що вказує на те, що адаптер зараз знаходиться в режимі монітора&lt;/p>
+&lt;p>Інструменти для проведення тестів на проникнення включені в Kali Linux з самого початку.&lt;/p>
+&lt;h3 id="2-завершення-конфліктуючих-процесів">2. Завершення конфліктуючих процесів
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo airmon-ng check &lt;span class="nb">kill&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Вимкнення пов&amp;rsquo;язаних з мережею служб вирішує проблеми, пов&amp;rsquo;язані з налаштуванням режиму монітора, необхідного для захоплення пакетів.&lt;/p>
+&lt;h3 id="3-увімкнення-режиму-монітора">3. Увімкнення режиму монітора
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo airmon-ng start wlan0
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Переключіть бездротовий інтерфейс у режим монітора, якщо це не сталося на попередніх кроках, для початку захоплення трафіку.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Перевірка режиму монітора&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo airmon-ng
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">iwconfig
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-12.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-12_hu430927218304805583.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-12_hu341691186495280105.png 1024w"
+loading="lazy"
+alt="Ми вже бачимо, що адаптер знаходиться в режимі монітора і готовий до використання з інструментом airmon-ng"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;h3 id="4-сканування-точок-доступу">4. Сканування точок доступу
+&lt;/h3>&lt;p>Пошук найближчих точок доступу Wi-Fi для знаходження нашої кінцевої цілі.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo airodump-ng wlan0mon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-13.png"
+width="3662"
+height="2382"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-13_hu2935775736471737627.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-13_hu14575334830217674412.png 1024w"
+loading="lazy"
+alt="Зверніть увагу на конкретну мережу, щоб зібрати деталі, необхідні для оцінки подальших кроків."
+class="gallery-image"
+data-flex-grow="153"
+data-flex-basis="368px"
+>&lt;/p>
+&lt;p>Інструмент &lt;code>airodump-ng&lt;/code> надає повну інформацію про доступні мережі, включаючи канали та BSSID.&lt;/p>
+&lt;h3 id="5-захоплення-даних-рукостискання">5. Захоплення даних рукостискання
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Почніть захоплення пакетів у цільовій мережі&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo airodump-ng -w dump -c &lt;span class="o">[&lt;/span>канал&lt;span class="o">]&lt;/span> --bssid &lt;span class="o">[&lt;/span>BSSID&lt;span class="o">]&lt;/span> wlan0mon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-14.png"
+width="3662"
+height="2382"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-14_hu9276788394629509218.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-14_hu17290370422062808061.png 1024w"
+loading="lazy"
+alt="Як вказано всередині червоного прямокутника - мережа не порожня, клієнти підключені і передають пакети"
+class="gallery-image"
+data-flex-grow="153"
+data-flex-basis="368px"
+>&lt;/p>
+&lt;p>Замініть &lt;code>[канал]&lt;/code> та &lt;code>[BSSID]&lt;/code> інформацією вашої цільової мережі. Рукостискання відбувається, коли будь-який пристрій підключається до вашої мережі. Захоплення цього - ваш шанс спробувати протестувати пароль мережі офлайн.&lt;/p>
+&lt;h3 id="6-запуск-атаки-деаутентифікації">6. Запуск атаки деаутентифікації
+&lt;/h3>&lt;p>Змусьте пристрої перепідключитися до мережі, тим самим збільшуючи ймовірність захоплення даних рукостискання.&lt;/p>
+&lt;p>Створіть інше вікно застосунку Terminal і розмістіть його поруч з уже запущеною командою, виконаною на попередньому кроці&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo aireplay-ng --deauth &lt;span class="m">0&lt;/span> -a &lt;span class="o">[&lt;/span>BSSID&lt;span class="o">]&lt;/span> wlan0mon
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Замініть &lt;code>BSSID&lt;/code> на ваш власний. Атаки деаутентифікації перешкоджають користувачам використовувати підключення, змушуючи всі підключені пристрої повторно автентифікуватися, щоб процес міг бути перехоплений.&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-15.png"
+width="3226"
+height="2186"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-15_hu1869897530345261817.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-15_hu11644000135749629526.png 1024w"
+loading="lazy"
+alt="Почали відправляти атаку деаутентифікації"
+class="gallery-image"
+data-flex-grow="147"
+data-flex-basis="354px"
+>&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-16.png"
+width="3226"
+height="2186"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-16_hu10329597615720187784.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-16_hu401750471348987325.png 1024w"
+loading="lazy"
+alt="Отримавши EAPOL, це означає, що клієнт здійснив рукостискання і успішно підключився до нашої мережі"
+class="gallery-image"
+data-flex-grow="147"
+data-flex-basis="354px"
+>&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-17.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-17_hu13587203543808877341.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-17_hu197724947621675297.png 1024w"
+loading="lazy"
+alt="Наші згенеровані файли"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;p>Отже, тепер ми можемо перейти до кроку 7, щоб точно шукати рукостискання EAPOL і витягти його для передачі меншої кількості даних конвертеру, або просто пропустити це, оскільки ми вже знаємо, що дамп вже містить необхідні дані&lt;/p>
+&lt;h3 id="7-аналіз-захоплених-даних-за-допомогою-wireshark-опціонально">7. Аналіз захоплених даних за допомогою Wireshark (опціонально)
+&lt;/h3>&lt;p>Шукайте захоплені пакети та підтвердьте, що успішне рукостискання було захоплено.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">wireshark dump-01.cap
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-18.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-18_hu1878145799130705105.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-18_hu10023674089199996956.png 1024w"
+loading="lazy"
+alt="Дамп відфільтрований для відображення лише даних EAPOL"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;p>&lt;code>EAPOL&lt;/code> є частиною фільтра Wireshark, який полегшує знаходження відповідних пакетів автентифікації. Ви повинні були бачити це ключове слово на попередньому кроці, що вказує на те, що хтось підключився до мережі. Ми можемо витягти лише рукостискання &lt;code>EAPOL&lt;/code>, щоб зменшити розмір файлу, або конвертувати (наступний крок) файл без його модифікації, що працює майже в кожному випадку, якщо ви не робите тривалих сканувань (&amp;gt; 5 хвилин)&lt;/p>
+&lt;h3 id="8-конвертація-захопленого-файлу-у-формат-для-нашого-наступного-інструменту">8. Конвертація захопленого файлу у формат для нашого наступного інструменту
+&lt;/h3>&lt;p>Використовуючи офіційний конвертер, наданий командою Hashcat, файл захоплення потрібно конвертувати у відповідний формат. Можна використовувати онлайн-інструмент &lt;a class="link" href="https://hashcat.net/cap2hashcat/" target="_blank" rel="noopener"
+>тут&lt;/a> або використовувати CLI&lt;/p>
+&lt;p>Переконайтеся, що ви перезапустили NetworkManager, щоб відновити доступ до Інтернету, інакше ви не зможете завантажити пакет&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo systemctl restart NetworkManager
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Якщо ви хочете використовувати інструмент CLI замість простого веб-сайту, вам потрібно встановити пакет &lt;code>hcxtools&lt;/code>, який містить майже все від команди Hashcat.&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-19.png"
+width="2784"
+height="1900"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-19_hu89482103143053841.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-19_hu12146795507042383071.png 1024w"
+loading="lazy"
+alt="Встановіть hcxtools, щоб отримати доступ до бінарного файлу hcxpcapngtool"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="351px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">sudo apt install hcxtools
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hcxpcapngtool -o dump.hc22000 dump-01.cap
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Після виконання ви повинні побачити щось подібне&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-20.png"
+width="3680"
+height="2382"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-20_hu16658786979853189348.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-20_hu9966649660890107595.png 1024w"
+loading="lazy"
+alt="Інструмент успішно виявив EAPOL і конвертував у відповідний формат"
+class="gallery-image"
+data-flex-grow="154"
+data-flex-basis="370px"
+>
+&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-21.png"
+width="3680"
+height="2382"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-21_hu140817003765395801.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/vmware-screen-21_hu10415238519897099765.png 1024w"
+loading="lazy"
+alt="Ми бачимо повідомлення про успіх і готові рухатися далі"
+class="gallery-image"
+data-flex-grow="154"
+data-flex-basis="370px"
+>&lt;/p>
+&lt;h3 id="9-декодування-хешу-захопленого-файлу-в-реальний-пароль">9. Декодування хешу захопленого файлу в реальний пароль
+&lt;/h3>&lt;p>Нарешті, давайте проведемо тест на міцність пароля за допомогою Hashcat. Я буду тестувати це на своєму Macbook Pro 16 2021 з GPU M1 Pro та i7-8700 + RX 6600 XT, використовуючи macOS Sonoma (Hackintosh)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">hashcat -m &lt;span class="m">22000&lt;/span> dump.hc22000 -a &lt;span class="m">3&lt;/span> &lt;span class="s2">&amp;#34;?d?d?d?d?d?d?d?d&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>де:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-m 22000&lt;/code> визначає алгоритм WPA-PBKDF2-PMKID+EAPOL.&lt;/li>
+&lt;li>&lt;code>-a 3&lt;/code> вказує на атаку за маскою.&lt;/li>
+&lt;li>&lt;code>&amp;quot;?d&amp;quot;&lt;/code> представляє цифру.&lt;/li>
+&lt;/ul>
+&lt;h4 id="час-на-зламування-хешу">Час на зламування хешу
+&lt;/h4>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align: left">&lt;strong>GPU&lt;/strong>&lt;/th>
+&lt;th style="text-align: left">&lt;strong>Час зламування (8-значний числовий пароль)&lt;/strong>&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align: left">AMD RX 6600 XT&lt;/td>
+&lt;td style="text-align: left">~5 хвилин&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">NVIDIA GTX 1660 Ti&lt;/td>
+&lt;td style="text-align: left">~10 хвилин&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">Apple M1 Pro GPU&lt;/td>
+&lt;td style="text-align: left">~12 хвилин&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align: left">Apple M1 GPU&lt;/td>
+&lt;td style="text-align: left">~40 хвилин&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-m1-pro-1.png"
+width="2264"
+height="1568"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-m1-pro-1_hu17361306262619117649.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-m1-pro-1_hu12832115152496732285.png 1024w"
+loading="lazy"
+alt="Запуск з GPU M1 Pro"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="346px"
+>
+&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-rx-6600-xt-1.png"
+width="1314"
+height="729"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-rx-6600-xt-1_hu7771694282553237607.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-rx-6600-xt-1_hu10523629210333159372.png 1024w"
+loading="lazy"
+alt="Запуск з RX 6600 XT"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="432px"
+>&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-m1-pro-2.png"
+width="2264"
+height="1568"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-m1-pro-2_hu12351433808095157305.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-m1-pro-2_hu7775117869194839334.png 1024w"
+loading="lazy"
+alt="Оцінений час - 15 хвилин для зламування"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="346px"
+>
+&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-rx-6600-xt-2.png"
+width="1314"
+height="729"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-rx-6600-xt-2_hu3774173748362179723.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/gpu-rx-6600-xt-2_hu5308090431896243026.png 1024w"
+loading="lazy"
+alt="Оцінений час - 6 хвилин для зламування"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="432px"
+>&lt;/p>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/cracked-m1-pro.png"
+width="2264"
+height="1568"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/cracked-m1-pro_hu1253132177957613558.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/cracked-m1-pro_hu9298807276731764611.png 1024w"
+loading="lazy"
+alt="Зламано з M1 Pro"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="346px"
+>
+&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/cracked-rx-6600-xt.png"
+width="1314"
+height="729"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/cracked-rx-6600-xt_hu9515341434614964290.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/cracked-rx-6600-xt_hu14543645361469547616.png 1024w"
+loading="lazy"
+alt="Зламано з RX 6600 XT"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="432px"
+>&lt;/p>
+&lt;p>Для тестування міцності паролів Wi-Fi багато користувачів покладаються на прості або стандартні паролі, такі як 8-значні числові комбінації. Крім стандартних, багато користувачів використовують свої номери телефонів як паролі Wi-Fi, і вони, у свою чергу, також слідують передбачуваним форматам, особливо в певних регіонах.&lt;/p>
+&lt;p>Наприклад, український номер телефону, як &lt;code>0661234567&lt;/code>, &lt;code>0951234567&lt;/code>, має вже відомий шаблон і може бути використаний для зменшення кількості ітерацій під час тесту на міцність пароля.&lt;/p>
+&lt;h3 id="10-доступ-до-мережі">10. Доступ до мережі
+&lt;/h3>&lt;p>Якщо пароль визначено за короткий час, це є чітким показником поганої безпеки. Ця інформація є цінною для використання сильних, складних паролів для захисту Wi-Fi мереж.&lt;/p>
+&lt;h2 id="наслідки-та-чому-більшість-wi-fi-мереж-є-небезпечними">Наслідки та чому більшість Wi-Fi мереж є небезпечними
+&lt;/h2>&lt;h3 id="слабкі-паролі">Слабкі паролі
+&lt;/h3>&lt;p>Занадто багато користувачів призначають прості, легко вгадувані паролі. Використання стандартних або поширених паролів робить атаки методом грубої сили успішними.&lt;/p>
+&lt;h3 id="використання-застарілих-протоколів-безпеки">Використання застарілих протоколів безпеки
+&lt;/h3>&lt;p>Ті мережі, які все ще використовують WEP або які мають WPA/WPA2, але погано налаштовані, залишаються дуже вразливими до атак. Навіть WPA2 може бути скомпрометований, якщо він не встановлений правильно.&lt;/p>
+&lt;h3 id="відсутність-обізнаності-користувачів">Відсутність обізнаності користувачів
+&lt;/h3>&lt;p>Користувачі часто не проінформовані щодо безпеки Wi-Fi і тому ніколи не змінюють налаштування за замовчуванням. Типова людина встановить роутер і ніколи не торкнеться його знову, поки він не зламається. Вони не використовують інтегрований веб-інтерфейс, щоб побачити, хто підключений до мережі, що є досить зручною функцією.&lt;/p>
+&lt;h3 id="доступність-інструментів-тестування">Доступність інструментів тестування
+&lt;/h3>&lt;p>Усі інструменти, використані в цьому посібнику, можна безкоштовно завантажити, і вони дуже доступні. Це означає, що поріг для тестування мережевої безпеки низький, але потенційне зловживання через цей факт набагато більше.&lt;/p>
+&lt;h2 id="захист-вашої-wi-fi-мережі">Захист вашої Wi-Fi мережі
+&lt;/h2>&lt;h3 id="використовуйте-сильні-складні-паролі">Використовуйте сильні, складні паролі
+&lt;/h3>&lt;p>Паролі повинні бути довгими і складатися з різноманітних літер, цифр та спеціальних символів.&lt;/p>
+&lt;h3 id="покращіть-налаштування-безпеки">Покращіть налаштування безпеки
+&lt;/h3>&lt;p>Використовуйте WPA3, якщо це можливо. Не використовуйте нічого менш захищеного, ніж WPA2 з увімкненим шифруванням AES.&lt;/p>
+&lt;h3 id="вимкніть-wps">Вимкніть WPS
+&lt;/h3>&lt;p>WPS може бути активною вразливістю в безпеці. Ми можемо розглянути це в іншій статті, де ми могли б обговорити WPS як потенційну вразливість. Вимкнення цієї функції усуває ще один вектор атаки.&lt;/p>
+&lt;p>Якщо у вас є роутер TP-LINK, ви можете зробити це:
+Перейдіть до панелі адміністратора роутера (зазвичай &lt;code>192.168.0.1&lt;/code>)&lt;/p>
+&lt;ul>
+&lt;li>Увійдіть, використовуючи свої облікові дані&lt;/li>
+&lt;li>Натисніть на вкладку &lt;code>Advanced&lt;/code>&lt;/li>
+&lt;li>Натисніть &lt;code>Wireless&lt;/code> і виберіть &lt;code>WPS&lt;/code> з меню&lt;/li>
+&lt;li>Вимкніть цей параметр&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/wps-off.png"
+width="2266"
+height="1920"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/wps-off_hu14804220364809924475.png 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/wps-off_hu8565643422817777829.png 1024w"
+loading="lazy"
+alt="Це має бути вимкнено"
+class="gallery-image"
+data-flex-grow="118"
+data-flex-basis="283px"
+>&lt;/p>
+&lt;h3 id="оновлення-прошивки-роутера">Оновлення прошивки роутера
+&lt;/h3>&lt;p>Виробники публікують оновлення для виправлення вразливостей. Підтримка прошивки в актуальному стані покращує безпеку.&lt;/p>
+&lt;h3 id="моніторинг-підключених-пристроїв">Моніторинг підключених пристроїв
+&lt;/h3>&lt;p>Періодично &lt;strong>перевіряйте&lt;/strong> і дивіться, які пристрої підключені до вашої мережі, щоб виявити несанкціонований доступ.&lt;/p>
+&lt;h3 id="фішинг">Фішинг
+&lt;/h3>&lt;p>&lt;img src="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/phishing.webp"
+width="1920"
+height="1080"
+srcset="https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/phishing_hu16727193522974883720.webp 480w, https://yegormi.github.io/post/why-most-wi-fi-networks-are-insecure/img/phishing_hu6558097622381708648.webp 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/p>
+&lt;p>Незалежно від вищезгаданих технічних слабкостей, &lt;strong>фішинг&lt;/strong> залишається, мабуть, одним з найбільш стійких та ефективних методів атаки. Фішинг не експлуатує безпосередньо протоколи Wi-Fi, а натомість націлений на користувача для викрадення конфіденційної інформації, такої як паролі або особисті дані. Незалежно від того, наскільки просунеться мережева безпека, фішингові атаки завжди будуть проблемою, оскільки вони покладаються на людську довіру та помилки. Саме тому обізнаність користувачів щодо фішингу є настільки ж важливою, як і будь-який технічний захист. У довгостроковій перспективі навчання користувачів розпізнавати спроби фішингу може виявитися найважливішою стратегією для захисту Wi-Fi мереж.&lt;/p>
+&lt;h2 id="висновок">Висновок
+&lt;/h2>&lt;p>Той факт, що мережу Wi-Fi можна зламати і отримати до неї доступ так легко, використовуючи широко доступні інструменти, показує серйозний пробіл у безпеці. Фактично, завдяки розумінню цих вразливостей, користувачі усвідомлюють кроки, які вони повинні зробити для захисту своїх мереж: від сильних паролів до оновлених протоколів і тому подібного, до підвищеної пильності щодо несанкціонованого доступу.&lt;/p>
+&lt;h2 id="посилання">Посилання
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://www.kali.org/docs/" target="_blank" rel="noopener"
+>Офіційна документація Kali Linux&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.aircrack-ng.org/documentation.html" target="_blank" rel="noopener"
+>Документація Aircrack-ng&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://hashcat.net/wiki/" target="_blank" rel="noopener"
+>Вікі Hashcat&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.wireshark.org/docs/wsug_html_chunked/" target="_blank" rel="noopener"
+>Посібник користувача Wireshark&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>
