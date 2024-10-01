@@ -1,0 +1,12 @@
+# Rename this file to languages.toml to enable multilingual support
+[en]
+languageName = "English"
+languagedirection = "ltr"
+title = "Unveiling the myths of IT"
+weight = 1
+
+[uk]
+languageName = "Українська"
+languagedirection = "ltr"
+title = "Розкриття міфів IT"
+weight = 2
